@@ -10,7 +10,8 @@ GRANT ALL PRIVILEGES ON titama.* to root@localhost IDENTIFIED BY 'root';
 USE titama;
 
 CREATE TABLE Courses (
-    id VARCHAR(126) NOT NULL,
+    id VARCHAR(126) NOT NULL PRIMARY KEY,
+    cname VARCHAR(126) NOT NULL,
 	prof VARCHAR(256) NOT NULL,
     lec_days VARCHAR(126) NOT NULL,
     rec_days VARCHAR(126),
@@ -22,66 +23,103 @@ CREATE TABLE Courses (
     rec_start_m INTEGER ,
     rec_end_h INTEGER ,
     rec_end_m  INTEGER,
-    credit INTEGER NOT NULL,
-    PRIMARY KEY(id)
+    credit INTEGER NOT NULL
 );
-CREATE TABLE Users (
-    username VARCHAR(256) NOT NULL,
-	pwd VARCHAR(256) NOT NULL,
-    min_credit INTEGER NOT NULL,
-    math_level INTEGER NOT NULL
-    PRIMARY KEY(username)
+CREATE TABLE Prereqs(
+    cid VARCHAR(126) NOT NULL,
+    pid VARCHAR(126),
+    standing INTEGER
 );
-CREATE TABLE Took (
-    username VARCHAR(256) NOT NULL,
-	courseid VARCHAR(126) NOT NULL
-    PRIMARY KEY(username, courseid),
-    FOREIGN KEY(username) REFERENCES Users(username),
-    FOREIGN KEY(courseid) REFERENCES Courses(id)
+CREATE TABLE Same_time(
+    cid1 VARCHAR(126) NOT NULL,
+    cid2 VARCHAR(126)
 );
 
-INSERT INTO Courses(id, prof, lec_days, rec_days, lec_start_h, lec_start_m, lec_end_h, lec_end_m,rec_start_h, rec_start_m, rec_end_h, rec_end_m, credit) VALUES 
-("CSE114","Antonino Mione","MW","TUTH",14,0,15,20,14,0,15,20,4),
-("CSE214", "YoungMin Kwon", "TUTH", "W",14,0,15,20,14,0,14,53,3),
-("CSE215","Simon Woo", "TUTH","TH",15,30,16,50,12,30,13,23,3),
-("CSE219","Stuart Eisenstadt", "TUTH","M", 17,0,18,20,17,0,17,53,4),
-("CSE220","Antonino Mione","TUTH", "W",10,30,11,50,15,30,16,23,3),
-("CSE373", "Jihoon Ryoo", "MW",NULL,14,0,15,20,NULL,NULL,NULL,NULL,3),
-("CSE307","Arthur Lee","TUTH",NULL,14,0,15,20,NULL,NULL,NULL,NULL,3),
-("CSE306","YoungMin Kwon","TUTH",NULL, 15,30,16,50,NULL,NULL,NULL,NULL,3),
-("CSE310","BongJun Choi","MW",NULL,9,0,10,20,NULL,NULL,NULL,NULL,3),
-("CSE352","Stuart Eisenstadt","TUTH",NULL,12,30,13,50,NULL,NULL,NULL,NULL,3),
-("CSE300","Stuart Eisenstadt","MW",NULL,10,30,11,50,NULL,NULL,NULL,NULL,3),
-("CSE378","Vladimir Skvortsov","MW",NULL,15,30,16,50,NULL,NULL,NULL,NULL,3),
-("AMS151","Suil O", "MW", NULL, 3,30,4,50,NULL,NULL,NULL,NULL, 3),
-("AMS161","Kazem Mahdavi", "MW", NULL, 3,30,4,50,NULL,NULL,NULL,NULL, 3),
-("AMS210","Tan Cao", "MW", NULL, 17,0,18,20,NULL,NULL,NULL,NULL, 3),
-("AMS310","Myoungshic Jhun", "MW", NULL, 10,30,11,50,NULL,NULL,NULL,NULL, 3),
-("AMS301","Suil O", "MW", NULL, 17,0,18,20,NULL,NULL,NULL,NULL, 3),
-("MAT123","Alexander Krejci", "MW","F",15,30,16,50,12,30,13,23,3),
-("PHY131.1","Alexander Krejci","TUTH","W",10,30,11,50,10,30,11,23,3),
-("PHY131.2","Alexander Krejci","TUTH","TH",10,30,11,50,9,0,9,53,3),
-("PHY132","Alexander Krejci","MW","M",9,0,10,20,10,30,11,23,3),
-("PHY133.1", "Aaron Park","F",NULL,10,0,11,50,NULL,NULL,NULL,NULL,1),
-("PHY133.2", "Aaron Park","F", NULL, 12,30,14,20,NULL,NULL,NULL,NULL,1),
-("PHY134.1", "Aaron Park","F",NULL, 8,0,9,50,NULL,NULL,NULL,NULL,1),
-("PHY134.2", "Aaron Park","F",NULL,15,30,17,20,NULL,NULL,NULL,NULL,1),
+INSERT INTO Courses(id, cname, prof, lec_days, rec_days, lec_start_h, lec_start_m, lec_end_h, lec_end_m,rec_start_h, rec_start_m, rec_end_h, rec_end_m, credit) VALUES 
+("CSE114","CSE114","Antonino Mione","MW","TUTH",14,0,15,20,14,0,15,20,4),
+("CSE214", "CSE214","YoungMin Kwon", "TUTH", "W",14,0,15,20,14,0,14,53,3),
+("CSE215","CSE215","Simon Woo", "TUTH","TH",15,30,16,50,12,30,13,23,3),
+("CSE219","CSE219","Stuart Eisenstadt", "TUTH","M", 17,0,18,20,17,0,17,53,4),
+("CSE220","CSE220","Antonino Mione","TUTH", "W",10,30,11,50,15,30,16,23,3),
+("CSE373","CSE373", "Jihoon Ryoo", "MW",NULL,14,0,15,20,NULL,NULL,NULL,NULL,3),
+("CSE307","CSE307","Arthur Lee","TUTH",NULL,14,0,15,20,NULL,NULL,NULL,NULL,3),
+("CSE320","CSE320","YoungMin Kwon","TUTH",NULL, 15,30,16,50,NULL,NULL,NULL,NULL,3),
+("CSE310","CSE310","BongJun Choi","MW",NULL,9,0,10,20,NULL,NULL,NULL,NULL,3),
+("CSE352","CSE352","Stuart Eisenstadt","TUTH",NULL,12,30,13,50,NULL,NULL,NULL,NULL,3),
+("CSE300","CSE300","Stuart Eisenstadt","MW",NULL,10,30,11,50,NULL,NULL,NULL,NULL,3),
+("CSE378","CSE378","Vladimir Skvortsov","MW",NULL,15,30,16,50,NULL,NULL,NULL,NULL,3),
+("AMS151","AMS151","Suil O", "MW", NULL, 3,30,4,50,NULL,NULL,NULL,NULL, 3),
+("AMS161","AMS161","Kazem Mahdavi", "MW", NULL, 3,30,4,50,NULL,NULL,NULL,NULL, 3),
+("AMS210","AMS210","Tan Cao", "MW", NULL, 17,0,18,20,NULL,NULL,NULL,NULL, 3),
+("AMS310","AMS310","Myoungshic Jhun", "MW", NULL, 10,30,11,50,NULL,NULL,NULL,NULL, 3),
+("AMS301","AMS301","Suil O", "MW", NULL, 17,0,18,20,NULL,NULL,NULL,NULL, 3),
+("MAT123","MAT123","Alexander Krejci", "MW","F",15,30,16,50,12,30,13,23,3),
+("PHY131.1","PHY131","Alexander Krejci","TUTH","W",10,30,11,50,10,30,11,23,3),
+("PHY131.2","PHY131","Alexander Krejci","TUTH","TH",10,30,11,50,9,0,9,53,3),
+("PHY132","PHY132","Alexander Krejci","MW","M",9,0,10,20,10,30,11,23,3),
+("PHY133.1", "PHY133","Aaron Park","F",NULL,10,0,11,50,NULL,NULL,NULL,NULL,1),
+("PHY133.2", "PHY133","Aaron Park","F", NULL, 12,30,14,20,NULL,NULL,NULL,NULL,1),
+("PHY134.1","PHY134", "Aaron Park","F",NULL, 8,0,9,50,NULL,NULL,NULL,NULL,1),
+("PHY134.2", "Aaron Park","F","PHY134",NULL,15,30,17,20,NULL,NULL,NULL,NULL,1),
 ("BIO201","John Eimes","M",NULL,17,0,19,50,NULL,NULL,NULL,NULL,3);
 
-INSERT INTO Users(username, pwd, min_credit,math_level) VALUES
-("jd","dj", 12, 6),
-("dek", "ked", 15, 8);
+INSERT INTO Prereqs(cid, pid, standing) VALUES
+("CSE114", "MAT123",NULL),
+("CSE214", "CSE114",NULL),
+("CSE215","AMS151",NULL),
+("CSE219","CSE214",NULL),
+("CSE220","CSE214",NULL),
+("CSE300","WRT102",3),
+("CSE300","WRT102",4),
+("CSE373","CSE214",NULL),
+("CSE373","AMS210",NULL),
+("CSE307","CSE219",NULL),
+("CSE307","CSE220",NULL),
+("CSE306","CSE220",NULL),
+("CSE310","CSE214",NULL),
+("CSE310","CSE220",NULL),
+("CSE352","CSE219",NULL),
+("CSE378","AMS161",NULL),
+("CSE378","AMS210",NULL),
+("AMS151","MAT123",NULL),
+("AMS161","AMS151",NULL),
+("AMS210","AMS151",NULL),
+("AMS301","AMS210",NULL),
+("AMS310","AMS161",NULL),
+("MAT123",NULL,NULL),
+("PHY131","MAT123",NULL),
+("PHY132","PHY131",NULL),
+("PHY133",NULL,NULL),
+("PHY134","PHY133",NULL),
+("BIO201","MAT123",NULL);
 
-INSERT INTO Took(username, courseid) VALUES
-("jd","AMS151"), 
-("jd","CSE114"), 
-("dek","AMS161"), 
-("dek","CSE114"),
-("dek","PHY131"), 
-("dek","CSE214");
-
-
+INSERT INTO Same_time(cid1, cid2) VALUES
+("MAT123","AMS161"),("MAT123","CSE378"),("MAT123","AMS151"),("MAT123","CSE220"),("MAT123","PHY133.2"),
+("AMS151","AMS161"),("AMS151","CSE378"),("AMS151","MAT123"),("AMS151","CSE220"),
+("AMS161","AMS151"),("AMS161","CSE378"),("AMS161","MAT123"),("AMS161","CSE220"),
+("AMS210","AMS301"),("AMS210","CSE219"),("AMS210","BIO201"),
+("AMS310","CSE300"),("AMS310","PHY131.1"),("AMS310","PHY132"),
+("AMS301","AMS210"),("AMS301","CSE219"),("AMS301","BIO201"),
+("CSE114","CSE373"),("CSE114","CSE214"),("CSE114","CSE307"),
+("CSE214","CSE114"),("CSE214","CSE373"),("CSE214","CSE307"),
+("CSE215","CSE320"),("CSE215","CSE352"),
+("CSE219","BIO201"),("CSE219","AMS210"),("CSE219","AMS301"),
+("CSE220","PHY131.1"),("CSE220","PHY131.2"),("CSE220","AMS151"),("CSE220","AMS161"),("CSE220","CSE378"),("CSE220","MAT123"),
+("CSE300","AMS310"),("CSE300","PHY131.1"),("CSE300","PHY132"),
+("CSE307","CSE114"),("CSE307","CSE214"),
+("CSE310","PHY132"),
+("CSE320","CSE215"),
+("CSE352","CSE215"),
+("CSE373","CSE114"),("CSE373","CSE214"),
+("CSE378","AMS161"),("CSE378","AMS151"),("CSE378","MAT123"),("CSE378","CSE220"),
+("PHY131.1","CSE220"),("PHY131.1","AMS310"),("PHY131.1","CSE300"),("PHY131.1","PHY132"),
+("PHY131.2","CSE220"),
+("PHY132","CSE310"),("PHY132","CSE300"),("PHY132","AMS310"),("PHY132","PHY131.1"),
+("PHY133.1",NULL),
+("PHY133.2","MAT123"),
+("PHY134.1",NULL),
+("PHY134.2",NULL),
+("BIO201","CSE219"),("BIO201","AMS210"),("BIO201","AMS301"),
 SELECT * FROM Courses;
-SELECT * FROM Users;
-SELECT * FROM Takes;
+SELECT * FROM Prereqs;
 
