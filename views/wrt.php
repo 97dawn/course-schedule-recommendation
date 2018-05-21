@@ -2,9 +2,9 @@
 require "../application/user_info.php";
 session_start();
 if(isset($_POST['submit'])){
-    if(!empty($_POST['math'])){
-        foreach($_POST['math'] as $math){
-            $_SESSION['user_info']->setPassedMATHCourse($math);
+    if(!empty($_POST['ns'])){
+        foreach($_POST['ns'] as $ns){
+            $_SESSION['user_info']->setPassedNSCourse($ns);
         }
     }
 }
@@ -37,28 +37,28 @@ if(isset($_POST['submit'])){
             </div>
           </div>
           <div class="inner cover">
-              <h1> Select the Natural Science courses that you have passed.</h1>
-              <form action="wrt.php" method="post">
+              <h1> Select the Writing courses that you have passed.</h1>
+              <form method="post" action="result.php">
                    <table class="checkboxes">
                        <tr>
                             <td class="checkbox">
-                                <input class="button" type="checkbox" name="ns[]" value="PHY131" style="margin-right:10%;">PHY131
+                                <input class="button" type="checkbox" name="wrt[]" value="PHY131" style="margin-right:10%;">WAE190
                             </td>
                            <td class="checkbox">
-                                <input class="button" type="checkbox" name="ns[]" value="PHY132" style="margin-right:10%;">PHY132
+                                <input class="button" type="checkbox" name="wrt[]" value="PHY132" style="margin-right:10%;">WAE192
                             </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" name="ns[]" value="PHY133" style="margin-right:10%;">PHY133
+                               <input class="button" type="checkbox" name="wrt[]" value="PHY133" style="margin-right:10%;">WAE194
                            </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" name="ns[]" value="PHY134" style="margin-right:10%;">PHY134
+                               <input class="button" type="checkbox" name="wrt[]" value="PHY134" style="margin-right:10%;">WRT101
                            </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" name="ns[]" value="BIO201" style="margin-right:10%;">BIO201
+                               <input class="button" type="checkbox" name="wrt[]" value="BIO201" style="margin-right:10%;">WRT102
                            </td>
                        </tr>
                   </table>
-                   <input type="submit" value="Next" class="btn btn-lg btn-secondary" id="submitButton">
+                   <input type="submit" value="Submit" class="btn btn-lg btn-secondary" id="submitButton">
               </form>
             </div>
             <div class="mastfoot">

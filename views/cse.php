@@ -1,8 +1,19 @@
 <?php 
-require "../user_info.php";
+require "../application/user_info.php";
 session_start();
-if (!isset($_SESSION['user_info'])) {
-    $_SESSION['user_info'] = new UserInfo();
+if(isset($_POST['submit'])){
+    if(!empty($_POST['u1'])){
+        $_SESSION['user_info']->setStanding(1);
+    }
+    elseif(!empty($_POST['u2'])){
+        $_SESSION['user_info']->setStanding(2);
+    }
+    elseif(!empty($_POST['u3'])){
+        $_SESSION['user_info']->setStanding(3);
+    }
+    elseif(!empty($_POST['u4'])){
+        $_SESSION['user_info']->setStanding(4);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -12,7 +23,7 @@ if (!isset($_SESSION['user_info'])) {
     <meta name="author" content="Doeun Kim">
     <link rel="icon" href="img/favicon.png">
     <title>TITAMA</title>
-      <script  type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+      <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
       <link rel="stylesheet" href="../css/index.css" >
       <link rel="stylesheet" href="../css/course.css" >
@@ -105,19 +116,5 @@ if (!isset($_SESSION['user_info'])) {
           </div>
         </div>
       </div>
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-      <script src="../js/cse.js" type="text/javascript"></script>
-      <!--<script>
-          function clickHandler(button){
-              if(button.style.backgroundColor == "white"){
-                    button.style.backgroundColor = "black";
-                    button.style.color = "white";
-                }
-                else{
-                    button.style.backgroundColor = "white";
-                    button.style.color = "#753a88";
-                }
-          }
-    </script>-->
   </body>
 </html>

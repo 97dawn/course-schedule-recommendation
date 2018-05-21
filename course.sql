@@ -22,8 +22,7 @@ CREATE TABLE Courses (
     rec_start_h INTEGER ,
     rec_start_m INTEGER ,
     rec_end_h INTEGER ,
-    rec_end_m  INTEGER,
-    credit INTEGER NOT NULL
+    rec_end_m  INTEGER
 );
 CREATE TABLE Prereqs(
     cid VARCHAR(126) NOT NULL,
@@ -35,33 +34,33 @@ CREATE TABLE Same_time(
     cid2 VARCHAR(126)
 );
 
-INSERT INTO Courses(id, cname, prof, lec_days, rec_days, lec_start_h, lec_start_m, lec_end_h, lec_end_m,rec_start_h, rec_start_m, rec_end_h, rec_end_m, credit) VALUES 
-("CSE114","CSE114","Antonino Mione","MW","TUTH",14,0,15,20,14,0,15,20,4),
-("CSE214", "CSE214","YoungMin Kwon", "TUTH", "W",14,0,15,20,14,0,14,53,3),
-("CSE215","CSE215","Simon Woo", "TUTH","TH",15,30,16,50,12,30,13,23,3),
-("CSE219","CSE219","Stuart Eisenstadt", "TUTH","M", 17,0,18,20,17,0,17,53,4),
-("CSE220","CSE220","Antonino Mione","TUTH", "W",10,30,11,50,15,30,16,23,3),
-("CSE373","CSE373", "Jihoon Ryoo", "MW",NULL,14,0,15,20,NULL,NULL,NULL,NULL,3),
-("CSE307","CSE307","Arthur Lee","TUTH",NULL,14,0,15,20,NULL,NULL,NULL,NULL,3),
-("CSE320","CSE320","YoungMin Kwon","TUTH",NULL, 15,30,16,50,NULL,NULL,NULL,NULL,3),
-("CSE310","CSE310","BongJun Choi","MW",NULL,9,0,10,20,NULL,NULL,NULL,NULL,3),
-("CSE352","CSE352","Stuart Eisenstadt","TUTH",NULL,12,30,13,50,NULL,NULL,NULL,NULL,3),
-("CSE300","CSE300","Stuart Eisenstadt","MW",NULL,10,30,11,50,NULL,NULL,NULL,NULL,3),
-("CSE378","CSE378","Vladimir Skvortsov","MW",NULL,15,30,16,50,NULL,NULL,NULL,NULL,3),
-("AMS151","AMS151","Suil O", "MW", NULL, 3,30,4,50,NULL,NULL,NULL,NULL, 3),
-("AMS161","AMS161","Kazem Mahdavi", "MW", NULL, 3,30,4,50,NULL,NULL,NULL,NULL, 3),
-("AMS210","AMS210","Tan Cao", "MW", NULL, 17,0,18,20,NULL,NULL,NULL,NULL, 3),
-("AMS310","AMS310","Myoungshic Jhun", "MW", NULL, 10,30,11,50,NULL,NULL,NULL,NULL, 3),
-("AMS301","AMS301","Suil O", "MW", NULL, 17,0,18,20,NULL,NULL,NULL,NULL, 3),
-("MAT123","MAT123","Alexander Krejci", "MW","F",15,30,16,50,12,30,13,23,3),
-("PHY131.1","PHY131","Alexander Krejci","TUTH","W",10,30,11,50,10,30,11,23,3),
-("PHY131.2","PHY131","Alexander Krejci","TUTH","TH",10,30,11,50,9,0,9,53,3),
-("PHY132","PHY132","Alexander Krejci","MW","M",9,0,10,20,10,30,11,23,3),
-("PHY133.1", "PHY133","Aaron Park","F",NULL,10,0,11,50,NULL,NULL,NULL,NULL,1),
-("PHY133.2", "PHY133","Aaron Park","F", NULL, 12,30,14,20,NULL,NULL,NULL,NULL,1),
-("PHY134.1","PHY134", "Aaron Park","F",NULL, 8,0,9,50,NULL,NULL,NULL,NULL,1),
-("PHY134.2", "Aaron Park","F","PHY134",NULL,15,30,17,20,NULL,NULL,NULL,NULL,1),
-("BIO201","John Eimes","M",NULL,17,0,19,50,NULL,NULL,NULL,NULL,3);
+INSERT INTO Courses(id, cname, prof, lec_days, rec_days, lec_start_h, lec_start_m, lec_end_h, lec_end_m,rec_start_h, rec_start_m, rec_end_h, rec_end_m) VALUES 
+("CSE114","CSE114","Antonino Mione","MOWE","TUTH",14,0,15,20,14,0,15,20),
+("CSE214", "CSE214","YoungMin Kwon", "TUTH", "WE",14,0,15,20,14,0,14,53),
+("CSE215","CSE215","Simon Woo", "TUTH","TH",15,30,16,50,12,30,13,23),
+("CSE219","CSE219","Stuart Eisenstadt", "TUTH","MO", 17,0,18,20,17,0,17,53),
+("CSE220","CSE220","Antonino Mione","TUTH", "WE",10,30,11,50,15,30,16,23),
+("CSE373","CSE373", "Jihoon Ryoo", "MOWE",NULL,14,0,15,20,NULL,NULL,NULL,NULL),
+("CSE307","CSE307","Arthur Lee","TUTH",NULL,14,0,15,20,NULL,NULL,NULL,NULL),
+("CSE320","CSE320","YoungMin Kwon","TUTH",NULL, 15,30,16,50,NULL,NULL,NULL,NULL),
+("CSE310","CSE310","BongJun Choi","MOWE",NULL,9,0,10,20,NULL,NULL,NULL,NULL),
+("CSE352","CSE352","Stuart Eisenstadt","TUTH",NULL,12,30,13,50,NULL,NULL,NULL,NULL),
+("CSE300","CSE300","Stuart Eisenstadt","MOWE",NULL,10,30,11,50,NULL,NULL,NULL,NULL),
+("CSE378","CSE378","Vladimir Skvortsov","MOWE",NULL,15,30,16,50,NULL,NULL,NULL,NULL),
+("AMS151","AMS151","Suil O", "MOWE", NULL, 3,30,4,50,NULL,NULL,NULL,NULL),
+("AMS161","AMS161","Kazem Mahdavi", "MOWE", NULL, 3,30,4,50,NULL,NULL,NULL,NULL),
+("AMS210","AMS210","Tan Cao", "MOWE", NULL, 17,0,18,20,NULL,NULL,NULL,NULL),
+("AMS310","AMS310","Myoungshic Jhun", "MOWE", NULL, 10,30,11,50,NULL,NULL,NULL,NULL),
+("AMS301","AMS301","Suil O", "MOWE", NULL, 17,0,18,20,NULL,NULL,NULL,NULL),
+("MAT123","MAT123","Alexander Krejci", "MOWE","FR",15,30,16,50,12,30,13,23),
+("PHY131.1","PHY131","Alexander Krejci","TUTH","WE",10,30,11,50,10,30,11,23),
+("PHY131.2","PHY131","Alexander Krejci","TUTH","TH",10,30,11,50,9,0,9,53),
+("PHY132","PHY132","Alexander Krejci","MOWE","MO",9,0,10,20,10,30,11,23),
+("PHY133.1", "PHY133","Aaron Park","FR",NULL,10,0,11,50,NULL,NULL,NULL,NULL),
+("PHY133.2", "PHY133","Aaron Park","FR", NULL, 12,30,14,20,NULL,NULL,NULL,NULL),
+("PHY134.1","PHY134", "Aaron Park","FR",NULL, 8,0,9,50,NULL,NULL,NULL,NULL),
+("PHY134.2", "PHY134","Aaron Park","FR",NULL,15,30,17,20,NULL,NULL,NULL,NULL),
+("BIO201","BIO201", "John Eimes","MO",NULL,17,0,19,50,NULL,NULL,NULL,NULL);
 
 INSERT INTO Prereqs(cid, pid, standing) VALUES
 ("CSE114", "MAT123",NULL),
@@ -119,7 +118,4 @@ INSERT INTO Same_time(cid1, cid2) VALUES
 ("PHY133.2","MAT123"),
 ("PHY134.1",NULL),
 ("PHY134.2",NULL),
-("BIO201","CSE219"),("BIO201","AMS210"),("BIO201","AMS301"),
-SELECT * FROM Courses;
-SELECT * FROM Prereqs;
-
+("BIO201","CSE219"),("BIO201","AMS210"),("BIO201","AMS301");
