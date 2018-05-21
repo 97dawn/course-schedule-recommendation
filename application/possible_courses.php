@@ -1,66 +1,78 @@
 <?php
     class PossibleCourses{
-        private $availableToTake = Array();
         private $allOffers = Array();
         private $untakens = Array();
         private $takens = Array();
         
         public function getPossibleCourses(){       
-            setAllOffers();
-            setUntakensAndTakens();
-            return getAvailableCourses();
+            $this->setAllOffers();
+            $this->setUntakensAndTakens();
+            return $this->getAvailableCourses();
         }
 
         // Set all Fall 2018 offering courses
         private function setAllOffers(){
+            $username = "root";
+            $password = "root"; 
+            $dbname = "titama";
+            $servername = "localhost";
+
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            } 
             $sql = "SELECT cname FROM Courses;";
             $result =  $conn->query($sql) or die ("Error: " . mysql_error());
-            while( $row = mysql_fetch_assoc( $result)){
-                array_push($allOffers, $row['cname']);
+            while( $row = $result->fetch_assoc()){
+                $this->allOffers[] = $row['cname'];
             }
+            $conn->close();
         }
 
         // Get untaken courses among Fall 2018 courses
-        private function setUntakensAndTakens(){      
+        private function setUntakensAndTakens(){   
             session_start();
             foreach($_SESSION['user_info']->getCSECourses() as $cse=>$took){
                 if(!$took){
-                    if(in_array($cse, $allOffers)){
-                        array_push($untakens, $cse);
+                    if(in_array($cse, $this->allOffers)){
+                        $this->untakens[] = $cse;
                     }
                 }
                 else{
-                    array_push($takens, $cse);
+                    $this->takens[] = $cse;
                 }
             }
             foreach($_SESSION['user_info']->getNSCourses() as $ns=>$took){
                 if(!$took){
-                    if(in_array($ns, $allOffers)){
-                        array_push($untakens, $ns);
+                    if(in_array($ns, $this->allOffers)){
+                        $this->untakens[] = $ns;
                     }
                 }
                 else{
-                    array_push($takens, $ns);
+                    $this->takens[] = $ns;
                 }
             }
             foreach($_SESSION['user_info']->getMATHCourses() as $math=>$took){
                 if(!$took){
-                    if(in_array($math, $allOffers)){
-                        array_push($untakens, $math);
+                    if(in_array($math, $this->allOffers)){
+                        $this->untakens[] = $math;
                     }
                 }
                 else{
-                    array_push($takens, $math);
+                    $this->takens[] = $math;
                 }
             }
             foreach($_SESSION['user_info']->getWRTCourses() as $wrt=>$took){
                 if(!$took){
-                    if(in_array($wrt, $allOffers)){
-                        array_push($untakens, $wrt);
+                    if(in_array($wrt, $this->allOffers)){
+                        $this->untakens[] = $wrt;
                     }
                 }
                 else{
-                    array_push($takens, $wrt);
+                    $this->takens[] = $wrt;
                 }
             }
         }
@@ -68,36 +80,47 @@
         // Get available courses after checking prerequisites
         private function getAvailableCourses(){
             // Set prereqs array
+            $username = "root";
+            $password = "root"; 
+            $dbname = "titama";
+            $servername = "localhost";
+
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            } 
             $prereqs = Array();
             $sql = "SELECT * FROM Prereqs;";
             $result =  $conn->query($sql) or die ("Error: " . mysql_error());
-            while( $row = mysql_fetch_assoc( $result)){
-                if(!in_array($prereqs, $row['cid'])){
-                    $prereqs[$row['cid']]=Array();
-                    array_push($prereqs[$row['cid']], Array($row['pid']));
-                    array_push($prereqs[$row['cid']], Array($row['standing']));
+            while( $row = $result->fetch_assoc()){
+                if(!in_array($row['cid'] , $prereqs )){
+                    $prereqs[$row['cid']] = [[$row['pid']],[$row['standing']] ];
                 }
                 else{
-                    array_push($prereqs[$row['cid']][0], $row['pid']);
+                    $prereqs[$row['cid']][0][] = $row['pid'];
                 }
             }
             // For each untaken course, check prereqs with taken courses
             $availables = Array();
-            foreach($untakens as $uc){
+            foreach($this->untakens as $uc){
                 // first check standing
-                if($prereqs[$uc][1][0] == null || $_SESSION['standing'] >= $$prereqs[$uc][1][0]){
+                if($prereqs[$uc][1][0] == null || $_SESSION['user_info']->getStanding() >= $prereqs[$uc][1][0]){
                     // check prerequisites
                     $available = true;
-                    foreach($$prereqs[$uc][0] as $pre){
-                        if(!in_array($takens, $pre)){
+                    foreach($prereqs[$uc][0] as $pre){
+                        if(!in_array( $pre, $this->takens)){
                             $available &= false;
                         }
                     }
                     if($available){
-                        array_push($availables, $uc);
+                        $availables[] = $uc;
                     }
                 }                
             }
+            $conn->close();
             return $availables;
         }
     }

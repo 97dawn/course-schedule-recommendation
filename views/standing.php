@@ -1,10 +1,4 @@
-<?php 
-require "../application/user_info.php";
-session_start();
-if (!isset($_SESSION['user_info'])) {
-    $_SESSION['user_info'] = new UserInfo();
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>

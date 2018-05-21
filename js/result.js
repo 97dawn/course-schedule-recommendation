@@ -2,6 +2,7 @@ function result(){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function (){
         if(xhr.readyState === 4 && xhr.status === 200){
+            console.log(xhr.response);
             var json = JSON.parse(xhr.responseText);
             var dejson = "";
             var timetables = document.getElementById("timetable");

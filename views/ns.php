@@ -58,7 +58,7 @@ if(isset($_POST['submit'])){
                            </td>
                        </tr>
                   </table>
-                   <input type="submit" value="Next" class="btn btn-lg btn-secondary" id="submitButton">
+                   <input type="submit" value="Next" class="btn btn-lg btn-secondary" name="submit" id="submitButton">
               </form>
             </div>
             <div class="mastfoot">

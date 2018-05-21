@@ -1,6 +1,8 @@
 <?php 
 require "../application/user_info.php";
 session_start();
+$_SESSION['user_info'] = new UserInfo();
+
 if(isset($_POST['submit'])){
     if(!empty($_POST['u1'])){
         $_SESSION['user_info']->setStanding(1);
@@ -48,60 +50,60 @@ if(isset($_POST['submit'])){
                    <table class="checkboxes">
                        <tr>
                             <td class="checkbox">
-                                <input class="button" type="checkbox" onclick ="clickHandler(this);" name="cse[]" value="CSE114">CSE114
+                                <input class="button" type="checkbox"  name="cse[]" value="CSE114">CSE114
                             </td>
                            <td class="checkbox">
-                                <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE214">CSE214
+                                <input class="button" type="checkbox" name="cse[]" value="CSE214">CSE214
                             </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE215">CSE215
+                               <input class="button" type="checkbox"  name="cse[]" value="CSE215">CSE215
                            </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE219">CSE219
+                               <input class="button" type="checkbox"  name="cse[]" value="CSE219">CSE219
                            </td>
                        </tr>
                        <tr>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE220">CSE220
+                               <input class="button" type="checkbox"  name="cse[]" value="CSE220">CSE220
                            </td>
                             <td class="checkbox">
-                                <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE300">CSE300
+                                <input class="button" type="checkbox"  name="cse[]" value="CSE300">CSE300
                             </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE304">CSE304
+                               <input class="button" type="checkbox"  name="cse[]" value="CSE304">CSE304
                            </td>
 
                            <td class="checkbox">
-                               <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE305">CSE305
+                               <input class="button" type="checkbox"  name="cse[]" value="CSE305">CSE305
                            </td>
                        </tr>
                        <tr>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE306">CSE306
+                               <input class="button" type="checkbox"  name="cse[]" value="CSE306">CSE306
                            </td>
 
                            <td class="checkbox">
-                                <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE307">CSE307
+                                <input class="button" type="checkbox"  name="cse[]" value="CSE307">CSE307
                            </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE308">CSE308
+                               <input class="button" type="checkbox"  name="cse[]" value="CSE308">CSE308
                            </td>
 
                            <td class="checkbox" rowspan="2">
-                               <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]"value="CSE310">CSE310<br>/ CSE346
+                               <input class="button" type="checkbox"  name="cse[]"value="CSE310">CSE310<br>/ CSE346
                            </td>
                        </tr>
                        <tr>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE312">CSE312
+                               <input class="button" type="checkbox"  name="cse[]" value="CSE312">CSE312
                            </td>
 
                            <td class="checkbox">
-                               <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE320">CSE320
+                               <input class="button" type="checkbox"  name="cse[]" value="CSE320">CSE320
                            </td>
 
                            <td class="checkbox">
-                               <input class="button" type="checkbox" onclick="clickHandler(this);" name="cse[]" value="CSE373">CSE373
+                               <input class="button" type="checkbox"  name="cse[]" value="CSE373">CSE373
                            </td>
                        </tr>
                    </table>

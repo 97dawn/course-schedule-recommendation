@@ -42,23 +42,23 @@ if(isset($_POST['submit'])){
                    <table class="checkboxes">
                        <tr>
                             <td class="checkbox">
-                                <input class="button" type="checkbox" name="wrt[]" value="PHY131" style="margin-right:10%;">WAE190
+                                <input class="button" type="checkbox" name="wrt[]" value="WAE190" style="margin-right:10%;">WAE190
                             </td>
                            <td class="checkbox">
-                                <input class="button" type="checkbox" name="wrt[]" value="PHY132" style="margin-right:10%;">WAE192
+                                <input class="button" type="checkbox" name="wrt[]" value="WAE192" style="margin-right:10%;">WAE192
                             </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" name="wrt[]" value="PHY133" style="margin-right:10%;">WAE194
+                               <input class="button" type="checkbox" name="wrt[]" value="WAE194" style="margin-right:10%;">WAE194
                            </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" name="wrt[]" value="PHY134" style="margin-right:10%;">WRT101
+                               <input class="button" type="checkbox" name="wrt[]" value="WRT101" style="margin-right:10%;">WRT101
                            </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" name="wrt[]" value="BIO201" style="margin-right:10%;">WRT102
+                               <input class="button" type="checkbox" name="wrt[]" value="WRT102" style="margin-right:10%;">WRT102
                            </td>
                        </tr>
                   </table>
-                   <input type="submit" value="Submit" class="btn btn-lg btn-secondary" id="submitButton">
+                   <input type="submit" value="Submit" class="btn btn-lg btn-secondary"name="submit" id="submitButton">
               </form>
             </div>
             <div class="mastfoot">
