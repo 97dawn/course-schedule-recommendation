@@ -1,10 +1,8 @@
 function result(){
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "../application/result.php", true);
-    xhr.setRequestHeader("Content-type", "application/json");
     xhr.onreadystatechange = function (){
         if(xhr.readyState === 4 && xhr.status === 200){
-            var json = JSON.parse(xhr.response);
+            var json = JSON.parse(xhr.responseText);
             var dejson = "";
             var timetables = document.getElementById("timetable");
             timetables.innerHTML = "";
@@ -73,6 +71,9 @@ function result(){
                 
             }
         }
-    }
+    }    
     
+    xhr.open("POST", "../application/schedule.php", true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send();
 }

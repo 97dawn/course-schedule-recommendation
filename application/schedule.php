@@ -84,7 +84,7 @@
         }
         // compare length of same_timeline_courses and minimum courses that the user want to take
         $conn->close();
-        return json_encode($response);
+        echo(json_encode($response)) ;
     }
 
 ?>
