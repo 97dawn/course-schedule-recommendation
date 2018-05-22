@@ -111,7 +111,7 @@
                     // check prerequisites
                     $available = true;
                     foreach($prereqs[$uc][0] as $pre){
-                        if(!in_array( $pre, $this->takens)){
+                        if(!in_array( $pre, $this->takens) && $pre != null){
                             $available &= false;
                         }
                     }

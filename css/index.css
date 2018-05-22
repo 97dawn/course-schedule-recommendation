@@ -48,7 +48,7 @@ body {
     font-weight: bold;
     color: rgba(255,255,255,.5);
     border-bottom: 4px solid transparent;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
 }
 
 .nav-masthead .nav-link:hover, .nav-masthead .nav-link:focus {
@@ -71,6 +71,7 @@ body {
 .masthead {
     position: fixed;
     top: 0;
+    opacity:1;
 }
 .mastfoot {
     color: white;

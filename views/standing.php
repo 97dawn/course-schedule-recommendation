@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="inner cover">
-                        <h1> Select your current standing.</h1>
+                        <h1> Select your current academic standing.</h1>
                         <form action="cse.php" method="post" onsubmit="return checkCheckboxes();">
                             <table style="margin-left:auto; margin-right:auto;" class="checkboxes">
                                 <tr>
