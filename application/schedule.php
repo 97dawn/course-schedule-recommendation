@@ -19,6 +19,7 @@
     // Get the set of courses that the user has satisfied prerequisites
     $possibleCourses = new PossibleCourses();
     $coursesCanTake = $possibleCourses->getPossibleCourses();
+    
     // Get same timeline courses
     $sql = "SELECT * FROM Same_time;";
     $result =  $conn->query($sql) or die ("Error: " . mysql_error());

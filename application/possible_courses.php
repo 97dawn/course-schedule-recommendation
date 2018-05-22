@@ -36,43 +36,28 @@
         private function setUntakensAndTakens(){   
             session_start();
             foreach($_SESSION['user_info']->getCSECourses() as $cse=>$took){
-                if(!$took){
-                    if(in_array($cse, $this->allOffers)){
-                        $this->untakens[] = $cse;
-                    }
-                }
-                else{
+                if($took){
                     $this->takens[] = $cse;
                 }
             }
             foreach($_SESSION['user_info']->getNSCourses() as $ns=>$took){
-                if(!$took){
-                    if(in_array($ns, $this->allOffers)){
-                        $this->untakens[] = $ns;
-                    }
-                }
-                else{
+                if($took){
                     $this->takens[] = $ns;
                 }
             }
             foreach($_SESSION['user_info']->getMATHCourses() as $math=>$took){
-                if(!$took){
-                    if(in_array($math, $this->allOffers)){
-                        $this->untakens[] = $math;
-                    }
-                }
-                else{
+                if($took){
                     $this->takens[] = $math;
                 }
             }
             foreach($_SESSION['user_info']->getWRTCourses() as $wrt=>$took){
-                if(!$took){
-                    if(in_array($wrt, $this->allOffers)){
-                        $this->untakens[] = $wrt;
-                    }
-                }
-                else{
+                if($took){
                     $this->takens[] = $wrt;
+                }
+            }
+            foreach($this->allOffers as $course){
+                if(in_array($course, $this->takens) == false){
+                    $this->untakens[] = $course;
                 }
             }
         }
@@ -96,8 +81,8 @@
             $sql = "SELECT * FROM Prereqs;";
             $result =  $conn->query($sql) or die ("Error: " . mysql_error());
             while( $row = $result->fetch_assoc()){
-                if(!in_array($row['cid'] , $prereqs )){
-                    $prereqs[$row['cid']] = [[$row['pid']],[$row['standing']] ];
+                if(!array_key_exists($row['cid'] , $prereqs )){
+                    $prereqs[$row['cid']] = [ [$row['pid']],[$row['standing']] ];
                 }
                 else{
                     $prereqs[$row['cid']][0][] = $row['pid'];
@@ -111,8 +96,9 @@
                     // check prerequisites
                     $available = true;
                     foreach($prereqs[$uc][0] as $pre){
-                        if(!in_array( $pre, $this->takens) && $pre != null){
-                            $available &= false;
+                        if(in_array( $pre, $this->takens)==false && $pre != null){
+                            $available = false;
+                            break;
                         }
                     }
                     if($available){

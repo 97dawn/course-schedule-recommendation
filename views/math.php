@@ -51,6 +51,9 @@ if(isset($_POST['submit'])){
                                <input class="button" type="checkbox" name="math[]" value="AMS161"style="margin-right:10%;">AMS161
                            </td>
                            <td class="checkbox">
+                               <input class="button" type="checkbox" name="math[]" value="AMS210"style="margin-right:10%;">AMS210
+                           </td>
+                           <td class="checkbox">
                                <input class="button" type="checkbox" name="math[]" value="AMS310"style="margin-right:10%;">AMS310
                            </td>
                            <td class="checkbox">
