@@ -42,19 +42,19 @@ if(isset($_POST['submit'])){
                    <table class="checkboxes">
                        <tr>
                             <td class="checkbox">
-                                <input class="button" type="checkbox" name="math[]" value="MAT123">MAT123
+                                <input class="button" type="checkbox" name="math[]" value="MAT123"style="margin-right:10%;">MAT123
                             </td>
                            <td class="checkbox">
-                                <input class="button" type="checkbox" name="math[]" value="AMS151">AMS151
+                                <input class="button" type="checkbox" name="math[]" value="AMS151"style="margin-right:10%;">AMS151
                             </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" name="math[]" value="AMS161">AMS161
+                               <input class="button" type="checkbox" name="math[]" value="AMS161"style="margin-right:10%;">AMS161
                            </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" name="math[]" value="AMS310">AMS310
+                               <input class="button" type="checkbox" name="math[]" value="AMS310"style="margin-right:10%;">AMS310
                            </td>
                            <td class="checkbox">
-                               <input class="button" type="checkbox" name="math[]" value="AMS301">AMS301
+                               <input class="button" type="checkbox" name="math[]" value="AMS301"style="margin-right:10%;">AMS301
                            </td>
                        </tr>
                   </table>

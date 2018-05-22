@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
         <link rel="stylesheet" href="../css/index.css" >
         <link rel="stylesheet" href="../css/course.css" >
+        <script src="../js/check.js"></script>
     </head>
     <body>
         <div class="site-wrapper">
@@ -54,23 +55,5 @@
                 </div>
             </div>
         </div>
-        <script>
-            function uncheckOthers(checkbox){
-                for(var i=0; i<$(".button").length ; i++){
-                    if(checkbox != $(".button")[i]){
-                        $(".button").attr("checked",false);
-                        checkbox.checked=true;
-                    }
-                }
-            }
-            function checkCheckboxes(){
-                var numOfChecked = $( "input:checked" ).length;
-                if(numOfChecked == 0){
-                    alert("Please check the academic standing");
-                    return false;
-                }
-                return true;
-            }
-        </script>
     </body>
 </html>

@@ -118,5 +118,16 @@ if(isset($_POST['submit'])){
           </div>
         </div>
       </div>
+
+      <script>
+        function checkCheckboxes(){
+            var numOfChecked = $( "input:checked" ).length;
+            if(numOfChecked == 0){
+                alert("Please check the academic standing");
+                return false;
+            }
+            return true;
+        }
+    </script>
   </body>
 </html>

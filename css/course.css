@@ -21,6 +21,9 @@ input.button{
     -moz-transform: scale(2);
     -webkit-transform: scale(2); 
     -o-transform: scale(2);
+    background:transparent;
+    border:0px;
+    border-color: transparent;
 }
 #submitButton {
     color: #753a88;
