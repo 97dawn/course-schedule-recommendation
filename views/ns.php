@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
   <head>
     <meta charset="utf-8">
     <meta name="author" content="Doeun Kim">
-    <link rel="icon" href="img/favicon.png">
+    <link rel="icon" href="../img/favicon.png">
     <title>TITAMA</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
       <script src="//code.jquery.com/jquery-1.11.1.min.js" ></script>
