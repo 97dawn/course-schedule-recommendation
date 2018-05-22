@@ -5,10 +5,12 @@ function result(){
             var json = JSON.parse(xhr.responseText);
             var timetables = document.getElementsByClassName("timetables")[0];
             timetables.innerHTML="";
+            // When there is no course to take
             if(json['schedule'] == -1){
                 timetables.innerHTML = "<p style=\"font-size:20px;\"> There is nothing to take.</p>";
             }
             else{
+                // Get data from JSON file
                 for(var num in json['schedule']){
                     var div = "<div class = \"timetable"+num+"\" style=\"display: block;border: thick dotted white; padding-left:10px;padding-right:5px;margin:10px;display:inline-block;\"><br>";
                     var head = "<p style=\"font-size:20px; text-decoration: underline; font-weight:bold;\"> Schedule "+(num)+"</p>";
@@ -23,6 +25,7 @@ function result(){
                         var lecEndH = json.schedule[num][course].lec_end[0];
                         var lecEndM = json.schedule[num][course].lec_end[1];
     
+                        // Set lecture classes times
                         for(var j=0 ; j<lecDays.length ; j+=2){
                             var text="<p style=\"margin:0px; padding:0px;display:inline;\">";
                             if(lecDays.charAt(j)+lecDays.charAt(j+1) == "MO"){
@@ -56,6 +59,7 @@ function result(){
                             div += text;
                         }
     
+                        // Set recitation class time
                         if(recDays != null){
                             var recStartH = json.schedule[num][course].rec_start[0];
                             var recStartM = json.schedule[num][course].rec_start[1];
@@ -103,13 +107,15 @@ function result(){
                     div+="</div><br>";
                     timetables.innerHTML += div;
                 }
+
                 // Change some css
-                
                 var siteWrapper = document.getElementsByClassName("site-wrapper")[0];
-                if(siteWrapper.clientHeight >screen.height){
+                if(siteWrapper.clientHeight >= screen.height-70){
+                    var button = "<button onclick=\"topFunction()\" id=\"myBtn\">Go to Top</button>";
                     var html = document.getElementsByTagName("html")[0];
                     var body = document.getElementsByTagName("body")[0];
                     var mastFoot = document.getElementsByClassName("mastfoot")[0];
+                    document.getElementsByClassName("inner-cover")[0].innerHTML += button;
                     html.style.height = "auto";
                     body.style.height = "auto";
                     siteWrapper.style.height = "auto";
@@ -123,4 +129,20 @@ function result(){
     xhr.open("POST", "../application/schedule.php", true);
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(null);
+}
+window.onscroll = function() {scrollFunction()};
+
+// When the user scrolls down, button appears
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }

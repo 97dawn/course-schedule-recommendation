@@ -27,7 +27,9 @@
             $sql = "SELECT cname FROM Courses;";
             $result =  $conn->query($sql) or die ("Error: " . mysql_error());
             while( $row = $result->fetch_assoc()){
-                $this->allOffers[] = $row['cname'];
+                if(in_array($row['cname'], $this->allOffers) == false){
+                    $this->allOffers[] = $row['cname'];
+                }
             }
             $conn->close();
         }
@@ -91,20 +93,32 @@
             // For each untaken course, check prereqs with taken courses
             $availables = Array();
             foreach($this->untakens as $uc){
-                // first check standing
-                if($prereqs[$uc][1][0] == null || $_SESSION['user_info']->getStanding() >= $prereqs[$uc][1][0]){
-                    // check prerequisites
-                    $available = true;
-                    foreach($prereqs[$uc][0] as $pre){
-                        if(in_array( $pre, $this->takens)==false && $pre != null){
-                            $available = false;
-                            break;
-                        }
-                    }
-                    if($available){
+                if($uc == "PHY133"){
+                    if(in_array( "PHY131", $this->takens) || in_array( "MAT123", $this->takens)){
                         $availables[] = $uc;
                     }
-                }                
+                }
+                elseif($uc == "PHY134"){
+                    if( (in_array( "PHY132", $this->takens) && in_array( "PHY133", $this->takens)) || (in_array( "PHY131", $this->takens) && in_array( "PHY133", $this->takens))){
+                        $availables[] = $uc;
+                    }
+                }
+                else{
+                    // first check standing
+                    if($prereqs[$uc][1][0] == null || $_SESSION['user_info']->getStanding() >= $prereqs[$uc][1][0]){
+                        // check prerequisites
+                        $available = true;
+                        foreach($prereqs[$uc][0] as $pre){
+                            if(in_array( $pre, $this->takens)==false && $pre != null){
+                                $available = false;
+                                break;
+                            }
+                        }
+                        if($available){
+                            $availables[] = $uc;
+                        }
+                    } 
+                }                               
             }
             $conn->close();
             return $availables;

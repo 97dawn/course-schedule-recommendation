@@ -31,7 +31,9 @@
     // Get possible schedules
     $possibleSchedules = new PossibleSchedules();
     $schedules = $possibleSchedules->getPossibleSchedules($coursesCanTake, $overlap);
-    
+    //print_r("untakens: ".json_encode($possibleCourses->untakens));
+    //print_r("Courses can take: ".json_encode($coursesCanTake));
+
     // Set json data
     $response = [
       'schedule' => []
