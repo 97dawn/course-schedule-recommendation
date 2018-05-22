@@ -36,8 +36,8 @@
               </nav>
             </div>
           </div>
-          <div class="inner cover">
-            <div class="timetables" style="margin-top:50px;">
+          <div class="inner-cover">
+            <div class="timetables" style="margin-top:70px;">
             <input type="button" id="lastButton" value="Let's Check Timetables" class="btn btn-lg btn-secondary" onclick="result()">
             </div>
           </div>
