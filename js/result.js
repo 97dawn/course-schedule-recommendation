@@ -2,73 +2,82 @@ function result(){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function (){
         if(xhr.readyState === 4 && xhr.status === 200){
-            console.log(xhr.response);
             var json = JSON.parse(xhr.responseText);
+            console.log("json: "+json);
             var dejson = "";
-            var timetables = document.getElementById("timetable");
+            var timetables = document.getElementById("timetables");
             timetables.innerHTML = "";
             
             for(var schedule in json['data']){
+                var i=0;
                 var timetable = new Timetable();
                 timetable.setScope(9, 17);
-                timetable.addLocations(['Mon', 'Tue', 'Wed', 'Thur', 'Fri']); // for my table, locations are days
+                // for my table, locations are days. Mon:2018.8.27, Tue:2018.8.28, Wed:2018.8.29, Thur:2018.8.30, Fri:2018.8.31
+                timetable.addLocations(['Mon', 'Tue', 'Wed', 'Thur', 'Fri']); 
+                for(var course in json['data'][schedule]){
+                    
+                    var courseName = json.data.schedule[i].cname;
+                    var lecDays = json.data.schedule[i].lec_days;
+                    var recDays = json.data.schedule[i].rec_days;
+                    var lecStartH = json.data.schedule[i].lec_start[0];
+                    var lecStartM = json.data.schedule[i].lec_start[1];
+                    var lecEndH = json.data.schedule[i].lec_end[0];
+                    var lecEndM = json.data.schedule[i].lec_end[1];
+
+                    for(var j=0 ; j<lecDays.length ; j+=2){
+                        if(lecDays.charAt(j)+lecDays.charAt(j+1) == "MO"){
+                            timetable.addEvent(courseName, 'Mon', new Date(2018,8,27,lecStartH, lecStartM), new Date(2018,8,27,lecEndH, lecEndM), null);
+                        }
+                        else if(lecDays.charAt(j)+lecDays.charAt(j+1) == "TU"){
+                            timetable.addEvent(courseName, 'Tue', new Date(2018,8,28,lecStartH, lecStartM), new Date(2018,8,28,lecEndH, lecEndM), null);
+                        }
+                        else if(lecDays.charAt(j)+lecDays.charAt(j+1) == "WE"){
+                            timetable.addEvent(courseName, 'Wed', new Date(2018,8,29,lecStartH, lecStartM), new Date(2018,8,29,lecEndH, lecEndM), null);
+                        }
+                        else if(lecDays.charAt(j)+lecDays.charAt(j+1) == "TH"){
+                            timetable.addEvent(courseName, 'Thur', new Date(2018,8,30,lecStartH, lecStartM), new Date(2018,8,30,lecEndH, lecEndM), null);
+                        }
+                        else if(lecDays.charAt(j)+lecDays.charAt(j+1) == "FR"){
+                            timetable.addEvent(courseName, 'Fri', new Date(2018,8,31,lecStartH, lecStartM), new Date(2018,8,31,lecEndH, lecEndM), null);
+                        }
+                    }
+
+                    // if(recDays != null){
+                    //     var recStartH = json.data.schedule[i].rec_start[0];
+                    //     var recStartM = json.data.schedule[i].rec_start[1];
+                    //     var recEndH = json.data.schedule[i].rec_end[0];
+                    //     var recEndM = json.data.schedule[i].rec_end[1];
+                    //     for(var k=0 ; k<recDays.length ; k+=2){
+                    //         console.log(recDays);
+                    //         console.log(recDays.charAt(0));
+                    //         console.log(recDays.charAt(k+1));
+                    //         var day = recDays.charAt(k)+recDays.charAt(k+1);
+                    //         switch(day){
+                    //             case "MO":
+                    //                 timetable.addEvent(courseName, 'Mon', new Date(2018,8,27,recStartH, recStartM), new Date(2018,8,27,recEndH, recEndM), null);
+                    //                 break;
+                    //             case "TU":
+                    //                 timetable.addEvent(courseName, 'Tue', new Date(2018,8,28,recStartH, recStartM), new Date(2018,8,28,recEndH, recEndM), null);
+                    //                 break;
+                    //             case "WE":
+                    //                 timetable.addEvent(courseName, 'Wed', new Date(2018,8,29,recStartH, recStartM), new Date(2018,8,29,recEndH, recEndM), null);
+                    //                 break;
+                    //             case "TH":
+                    //                 timetable.addEvent(courseName, 'Thur', new Date(2018,8,30,recStartH, recStartM), new Date(2018,8,30,recEndH, recEndM), null);
+                    //                 break;
+                    //             case "FR":
+                    //                 timetable.addEvent(courseName, 'Fri', new Date(2018,8,31,recStartH, recStartM), new Date(2018,8,31,recEndH, recEndM), null);
+                    //                 break;
+                    //         }
+                    //     }
+                    // }
+                    i++;
+                }
             
-                var courseName = json['data'][schedule]['cname'];
-                var lecDays = json['data'][schedule]['lec_days'];
-                var recDay = json['data'][schedule]['rec_days'];
-                var lecStartH = json['data'][schedule]['lec_start'][0];
-                var lecStartM = json['data'][schedule]['lec_start'][1];
-                var lecEndH = json['data'][schedule]['lec_end'][0];
-                var lecEndM = json['data'][schedule]['lec_end'][1];
-
-                var lecStartDate = new Date(2018,1,1,lecStartH, lecStartM);
-                var lecEndDate = new Date(2018,1,1,lecEndH, lecEndM);
-                for(var i=0 ; i<lecDays.length ; i+=2){
-                    if(lecDays.charAt(i)+lecDays.charAt(i+1) == "MO"){
-                        timetable.addEvent(courseName, 'Mon', lecStartDate, lecEndDate, null);
-                    }
-                    else if(lecDays.charAt(i)+lecDays.charAt(i+1) == "TU"){
-                        timetable.addEvent(courseName, 'Tue', lecStartDate, lecEndDate, null);
-                    }
-                    else if(lecDays.charAt(i)+lecDays.charAt(i+1) == "WE"){
-                        timetable.addEvent(courseName, 'Wed', lecStartDate, lecEndDate, null);
-                    }
-                    else if(lecDays.charAt(i)+lecDays.charAt(i+1) == "TH"){
-                        timetable.addEvent(courseName, 'Thur', lecStartDate, lecEndDate, null);
-                    }
-                    else if(lecDays.charAt(i)+lecDays.charAt(i+1) == "FR"){
-                        timetable.addEvent(courseName, 'Fri', lecStartDate, lecEndDate, null);
-                    }
-                }
-
-                if(recDay != null){
-                    var recStartH = json['data'][schedule]['rec_start'][0];
-                    var recStartM = json['data'][schedule]['rec_start'][1];
-                    var recEndH = json['data'][schedule]['rec_end'][0];
-                    var recEndM = json['data'][schedule]['rec_end'][1];
-                    var recStartDate = new Date(2018,1,1,recStartH, recStartM);
-                    var recEndDate = new Date(2018,1,1,recEndH, recEndM);
-                    for(var i=0 ; i<recDays.length ; i+=2){
-                        if(recDays.charAt(i)+recDays.charAt(i+1) == "MO"){
-                            timetable.addEvent(courseName+" REC", 'Mon', recStartDate, recEndDate, null);
-                        }
-                        else if(recDays.charAt(i)+recDays.charAt(i+1) == "TU"){
-                            timetable.addEvent(courseName+" REC", 'Tue', recStartDate, recEndDate, null);
-                        }
-                        else if(recDays.charAt(i)+recDays.charAt(i+1) == "WE"){
-                            timetable.addEvent(courseName+" REC", 'Wed', recStartDate, recEndDate, null);
-                        }
-                        else if(recDays.charAt(i)+recDays.charAt(i+1) == "TH"){
-                            timetable.addEvent(courseName+" REC", 'Thur', recStartDate, recEndDate, null);
-                        }
-                        else if(recDays.charAt(i)+recDays.charAt(i+1) == "FR"){
-                            timetable.addEvent(courseName+" REC", 'Fri', recStartDate, recEndDate, null);
-                        }
-                    }
-                }
-                
+                var div = "<div id=timetable"+i+"></div>";
+                timetables.innerHTML = div;
                 var renderer = new Timetable.Renderer(timetable);
-                renderer.draw('.timetable'); // any css selector
+                renderer.draw('#timetable');
                 
             }
         }

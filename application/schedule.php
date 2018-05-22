@@ -29,9 +29,9 @@
 
     // Get possible schedules
     $possibleSchedules = new PossibleSchedules();
-    echo("Courses can take : " . json_encode($coursesCanTake) ."\n");
+    //echo("Courses can take : " . json_encode($coursesCanTake) ."\n");
     $schedules = $possibleSchedules->getPossibleSchedules($coursesCanTake, $overlap);
-    echo("Possible Schedules: ". json_encode($schedules)."\n");
+    //echo("Possible Schedules: ". json_encode($schedules)."\n");
     // Set json data
     $response = [
       'data' => []
@@ -49,7 +49,7 @@
             $sql = "SELECT * FROM Courses WHERE id='" . $schedules[$k][$array[$k]] . "';";
             $result =  $conn->query($sql) or die ("Error: " . mysql_error());
             $row = $result->fetch_assoc();
-            $response['data']['schedule' . $n][] = [
+            $response['data']['schedule'][] = [
               'cname'     => $row['cname'],
               'lec_days'   => $row['lec_days'],
               'rec_days'   => $row['rec_days'],

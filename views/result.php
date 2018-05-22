@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="inner cover">
-            <div id="timetable">
+            <div id="timetables">
               <form onsubmit="result()">
               <input type="submit" value="Let's Check Timetables" class="btn btn-lg btn-secondary" id="submitButton">
               </form>
