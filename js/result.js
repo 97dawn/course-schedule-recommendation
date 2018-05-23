@@ -115,12 +115,14 @@ function result(){
                     var html = document.getElementsByTagName("html")[0];
                     var body = document.getElementsByTagName("body")[0];
                     var mastFoot = document.getElementsByClassName("mastfoot")[0];
+                    var mastHead = document.getElementsByClassName("masthead")[0];
                     document.getElementsByClassName("inner-cover")[0].innerHTML += button;
                     html.style.height = "auto";
                     body.style.height = "auto";
                     siteWrapper.style.height = "auto";
                     siteWrapper.style.minHeight = "auto";
                     mastFoot.style.position = "relative";
+                    mastHead.style.position = "static";
                 }
             }
         }            

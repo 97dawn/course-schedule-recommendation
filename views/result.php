@@ -26,7 +26,7 @@
   <div class="site-wrapper">
       <div class="site-wrapper-inner">
         <div class="cover-container">
-          <div class="masthead clearfix">
+          <div class="masthead">
             <div class="inner">
               <h3 class="masthead-brand">TITAMA</h3>
               <nav class="nav nav-masthead">

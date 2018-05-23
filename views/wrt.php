@@ -18,7 +18,6 @@ if(isset($_POST['submit'])){
     <link rel="icon" href="../img/favicon.png">
     <title>TITAMA</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-      <script src="//code.jquery.com/jquery-1.11.1.min.js" ></script>
       <link rel="stylesheet" href="../css/index.css" >
       <link rel="stylesheet" href="../css/course.css" >
   </head>
@@ -26,7 +25,7 @@ if(isset($_POST['submit'])){
     <div class="site-wrapper">
       <div class="site-wrapper-inner">
         <div class="cover-container">
-          <div class="masthead clearfix">
+          <div class="masthead">
             <div class="inner">
               <h3 class="masthead-brand">TITAMA</h3>
               <nav class="nav nav-masthead">
