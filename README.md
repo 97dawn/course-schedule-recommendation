@@ -1,5 +1,7 @@
 # course-schedule-recommendation
 [course project] CSE336 - course schedule recommendation website
+## Technologies
+HTML, CSS, Bootstrap, Javascript, JQuery, Ajax, PHP, MySQL
 ## Settings
 1. Install local server by downloading any portable server that is compatible to your machine operating system
 ex) xampp, wampserver, mamp
@@ -17,7 +19,7 @@ ex) In xampp
 ```
 source c://xampp/htdocs/pathtofile/course.sql
 ```
-## Open website
+## How to Open website
 Enter the url like:
 ```
 localhost/'folder'
